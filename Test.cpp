@@ -122,17 +122,12 @@ TEST_CASE("Test 6 - Input Stream")
     Fraction b(1, 2);
     ifstream input("objects/test.txt"); // test.txt contains 1 2
 
-    SUBCASE("input to Fraction type")
-    {
-        Fraction a(5, 2);
-        CHECK_NOTHROW(input >> a);
-        CHECK_EQ(a == b, true); //'a' should be changed to 1/2 = b
-    }
-    SUBCASE("input to double type")
-    {
-        double f = 0;
-        CHECK_NOTHROW(input >> f);
-        CHECK_EQ(f == 0.5, true); //'f' should be changed to 0.5
-        CHECK_EQ(f == b, true);   // which equals to 1/2 = b
-    }
+    Fraction a(5, 2);
+    input >> a;
+    CHECK_EQ(a == b, true); //'a' should be changed to 1/2 = b
+
+    double f = 0;
+    input >> f;
+    CHECK_EQ(f == 0.5, true); //'f' should be changed to 0.5
+    CHECK_EQ(f == b, true);   // which equals to 1/2 = b
 }
