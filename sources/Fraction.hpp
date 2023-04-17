@@ -9,7 +9,7 @@ namespace ariel
     private:
         int nomintr;
         int denomintr;
-        //reduce fraction - https://www.tutorialspoint.com/reduce-the-fraction-to-its-lowest-form-in-cplusplus
+        void reduceFrac(); // reduce fraction - https://www.tutorialspoint.com/reduce-the-fraction-to-its-lowest-form-in-cplusplus
 
     public:
         Fraction(int nom, int denom) : nomintr(nom), denomintr(denom) {}
@@ -19,8 +19,10 @@ namespace ariel
         operator double() const
         {
             // https://stackoverflow.com/questions/14369673/round-double-to-3-points-decimal
-            //  return float(nomintr) / float(denomintr);
+            double rounded = roundPoint3(double(nomintr) / double(denomintr));
+            return rounded;
         }
+        double roundPoint3(double num) const;
 
         /** arithmetic
          * The + operator to add two fractions and return their sum as another fraction in reduced form.
@@ -33,7 +35,7 @@ namespace ariel
         friend Fraction operator*(const Fraction &a, const Fraction &other);
         friend Fraction operator/(const Fraction &a, const Fraction &other);
 
-        //floats/doubles
+        // floats/doubles
         friend Fraction operator+(const Fraction &a, const double other) { return a + Fraction(other); }
         friend Fraction operator-(const Fraction &a, const double other) { return a - Fraction(other); }
         friend Fraction operator*(const Fraction &a, const double other) { return a * Fraction(other); }
@@ -44,7 +46,7 @@ namespace ariel
         friend Fraction operator*(const double a, const Fraction &other) { return other * a; }
         friend Fraction operator/(const double a, const Fraction &other) { return Fraction(a) / other; }
 
-        //integers
+        // integers
         friend Fraction operator+(const Fraction &a, const int other) { return a + Fraction(other); }
         friend Fraction operator-(const Fraction &a, const int other) { return a - Fraction(other); }
         friend Fraction operator*(const Fraction &a, const int other) { return a * Fraction(other); }
@@ -66,7 +68,7 @@ namespace ariel
         friend bool operator>=(const Fraction &a, const Fraction &other) { return !(a < other); }
         friend bool operator==(const Fraction &a, const Fraction &other);
 
-        //floats/doubles
+        // floats/doubles
         friend bool operator<(const Fraction &a, const double other) { return a < Fraction(other); }
         friend bool operator>(const Fraction &a, const double other) { return a > Fraction(other); }
         friend bool operator<=(const Fraction &a, const double other) { return a <= Fraction(other); }
@@ -79,7 +81,7 @@ namespace ariel
         friend bool operator>=(const double a, const Fraction &other) { return Fraction(a) >= other; }
         friend bool operator==(const double a, const Fraction &other) { return Fraction(a) == other; }
 
-        //integers
+        // integers
         friend bool operator<(const Fraction &a, const int other) { return a < Fraction(other); }
         friend bool operator>(const Fraction &a, const int other) { return a > Fraction(other); }
         friend bool operator<=(const Fraction &a, const int other) { return a <= Fraction(other); }
@@ -109,9 +111,9 @@ namespace ariel
          * The << operator to print a fraction to an output stream in the format “numerator/denominator”.
          * The >> operator to read a fraction from an input stream by taking two integers as input.
          */
-        friend ostream &operator<<(ostream &os, const Fraction &frac);
-        friend istream &operator>>(istream &input, Fraction &frac);
-        friend ostream &operator<<(ostream &os, const float frac) {return os<<Fraction(frac);}
-        friend istream &operator>>(istream &input, float frac);
+        friend std::ostream &operator<<(std::ostream &output, const Fraction &frac);
+        friend std::istream &operator>>(std::istream &input, Fraction &frac);
+        friend std::ostream &operator<<(std::ostream &output, const float frac) { return output << Fraction(frac); }
+        friend std::istream &operator>>(std::istream &input, float frac);
     };
 }
