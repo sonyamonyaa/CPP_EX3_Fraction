@@ -16,6 +16,7 @@ Fraction ariel::operator+(const Fraction &a, const Fraction &other)
 	// int nn = a.nom * other.den +
 	// 	a.den * other.nom;
 	// int dd = a.den * other.den;
+	// return Fraction(nn, dd);
 	return Fraction(0);
 }
 Fraction ariel::operator-(const Fraction &a, const Fraction &other)
@@ -42,13 +43,19 @@ bool ariel::operator<(const Fraction &a, const Fraction &other) { return false; 
 bool ariel::operator>(const Fraction &a, const Fraction &other) { return false; }
 bool ariel::operator==(const Fraction &a, const Fraction &other) { return false; }
 
+/**increaments & decreaments
+ * https://www.programiz.com/cpp-programming/increment-decrement-operator-overloading
+*/
 // prefix
 Fraction &ariel::Fraction::operator++() {return *this;}
 Fraction &ariel::Fraction::operator--() {return *this;}
 // postfix
 Fraction &ariel::Fraction::operator++(int) {return *this;}
 Fraction &ariel::Fraction::operator--(int) {return *this;}
-/**streams*/
+
+/**streams
+ * https://www.tutorialspoint.com/cplusplus/input_output_operators_overloading.htm 
+*/
 std::ostream &ariel::operator<<(std::ostream &output, const Fraction &frac)
 {
 	return output << frac.nomintr << '/' << frac.denomintr;
