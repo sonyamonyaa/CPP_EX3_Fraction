@@ -35,7 +35,7 @@ TEST_CASE("Test 2 - Arithmetic Operations")
     SUBCASE("FLOAT BY FRACTION")
     {
         Fraction a(5, 3);
-        double f = 2.421;
+        float f = 2.421;
         CHECK_NOTHROW(f + a);
         CHECK_NOTHROW(f - a);
         CHECK_NOTHROW(f * a);
@@ -47,7 +47,7 @@ TEST_CASE("Test 2 - Arithmetic Operations")
     SUBCASE("FRACTION BY FLOAT")
     {
         Fraction a(5, 3);
-        double f = 2.421;
+        float f = 2.421;
         CHECK_NOTHROW(a + f);
         CHECK_NOTHROW(a - f);
         CHECK_NOTHROW(a * f);
@@ -59,7 +59,7 @@ TEST_CASE("Test 3 - Boolean Operations")
 {
     Fraction a(5, 2), b(1, 2);
     Fraction c(10, 4); // testing for reduction
-    double f = 2.5;
+    float f = 2.5;
     SUBCASE("FRACTION BY FRACTION")
     {
         CHECK_EQ(a < b, false);
@@ -92,15 +92,15 @@ TEST_CASE("Test 3 - Boolean Operations")
 TEST_CASE("Test 4 - Increament and Decreament")
 {
     Fraction a(5, 2), b(1, 2);
-    double f = 2.5;
+    float f = 2.5;
 }
 
 TEST_CASE("Test 5 - output stream")
 {
     Fraction a(5, 2), b(1, 2);
-    double f = 2.5;
+    float f = 2.5;
 
-    CHECK_NOTHROW(cout << "a: " << a << "b: " << b << endl);
+    CHECK_NOTHROW(cout << "a: " << a << " b: " << b << endl);
     CHECK_NOTHROW(cout << "a + b = " << a + b << endl);
     CHECK_NOTHROW(cout << "a - b = " << a - b << endl);
     CHECK_NOTHROW(cout << "a / b = " << a / b << endl);
@@ -120,14 +120,21 @@ TEST_CASE("Test 5 - output stream")
 TEST_CASE("Test 6 - Input Stream")
 {
     Fraction b(1, 2);
-    ifstream input("objects/test.txt"); // test.txt contains 1 2
-
-    Fraction a(5, 2);
-    input >> a;
-    CHECK_EQ(a == b, true); //'a' should be changed to 1/2 = b
-
-    double f = 0;
-    input >> f;
-    CHECK_EQ(f == 0.5, true); //'f' should be changed to 0.5
-    CHECK_EQ(f == b, true);   // which equals to 1/2 = b
+    SUBCASE("input to fraction")
+    {
+        ifstream input("objects/test.txt"); // test.txt contains 1 2
+        Fraction a(5, 2);
+        input >> a;
+        CHECK_EQ(a == b, true); //'a' should be changed to 1/2 = b
+    }
+    SUBCASE("INPUT TO FLOAT")
+    {
+        ifstream input("objects/test.txt");
+        float f = 0;
+        cout << "f before input " << Fraction(f) << endl;
+        input >> f;
+        cout << "f after input " << Fraction(f) << endl;
+        CHECK_EQ(f == 0.5, true); //'f' should be changed to 0.5
+        CHECK_EQ(f == b, true);   // which equals to 1/2 = b
+    }
 }

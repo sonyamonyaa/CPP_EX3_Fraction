@@ -5,26 +5,23 @@
 using namespace std;
 using namespace ariel;
 
-double ariel::Fraction::roundPoint3(double num) const
+void ariel::Fraction::lowestFrac(int &nom, int &denom)
 {
-	double precision = 0.001;
-	return std::round(num / precision) * precision;
+	
 }
-/** arithmetic*/
-ariel::Fraction  ariel::operator+(const Fraction &frac, const Fraction &other)
+
+float ariel::Fraction::roundPoint3(float num) const
 {
-	// int nn = frac.nom * other.den +
-	// 	frac.den * other.nom;
-	// int dd = frac.den * other.den;
-	// return Fraction(nn, dd);
+	return 0;
+}
+
+/** arithmetic*/
+ariel::Fraction ariel::operator+(const Fraction &frac, const Fraction &other)
+{
 	return Fraction(0);
 }
 ariel::Fraction ariel::operator-(const Fraction &frac, const Fraction &other)
 {
-	// int nn = nom * other.den -
-	// 	den * other.nom;
-	// int dd = den * other.den;
-	// return Fraction(nn, dd);
 	return Fraction(0);
 }
 
@@ -39,23 +36,32 @@ ariel::Fraction ariel::operator/(const Fraction &frac, const Fraction &other)
 }
 
 /**comparisons*/
-bool ariel::operator<(const Fraction &frac, const Fraction &other) { return false; }
-bool ariel::operator>(const Fraction &frac, const Fraction &other) { return false; }
-bool ariel::operator==(const Fraction &frac, const Fraction &other) { return false; }
+bool ariel::operator<(const Fraction &frac, const Fraction &other)
+{
+	return false;
+}
+bool ariel::operator>(const Fraction &frac, const Fraction &other)
+{
+	return false;
+}
+bool ariel::operator==(const Fraction &frac, const Fraction &other)
+{
+	return false;
+}
 
 /**increaments & decreaments
  * https://www.programiz.com/cpp-programming/increment-decrement-operator-overloading
-*/
+ */
 // prefix
-ariel::Fraction &ariel::Fraction::operator++() {return *this;}
-ariel::Fraction &ariel::Fraction::operator--() {return *this;}
+ariel::Fraction &ariel::Fraction::operator++() { return *this; }
+ariel::Fraction &ariel::Fraction::operator--() { return *this; }
 // postfix
-ariel::Fraction &ariel::Fraction::operator++(int) {return *this;}
-ariel::Fraction &ariel::Fraction::operator--(int) {return *this;}
+ariel::Fraction &ariel::Fraction::operator++(int) { return *this; }
+ariel::Fraction &ariel::Fraction::operator--(int) { return *this; }
 
 /**streams
- * https://www.tutorialspoint.com/cplusplus/input_output_operators_overloading.htm 
-*/
+ * https://www.tutorialspoint.com/cplusplus/input_output_operators_overloading.htm
+ */
 std::ostream &ariel::operator<<(std::ostream &output, const Fraction &frac)
 {
 	return output << frac.nomintr << '/' << frac.denomintr;
@@ -63,10 +69,13 @@ std::ostream &ariel::operator<<(std::ostream &output, const Fraction &frac)
 std::istream &ariel::operator>>(std::istream &input, Fraction &frac)
 {
 	// TODO: insert return statement here
-	return input >> frac.nomintr >>frac.denomintr;
+	return input >> frac.nomintr >> frac.denomintr;
 }
-std::istream &ariel::operator>>(std::istream &input, float frac)
+std::istream &ariel::operator>>(std::istream &input, float &frac)
 {
+	// std::istream &operator>>(std::istream &input, float &frac)
+	Fraction f = Fraction(frac);
 	// TODO: insert return statement here
-	return input >> Fraction(frac);
+	input >> f;
+	return input;
 }
