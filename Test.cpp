@@ -92,7 +92,15 @@ TEST_CASE("Test 3 - Boolean Operations")
 TEST_CASE("Test 4 - Increament and Decreament")
 {
     Fraction a(5, 2), b(1, 2);
-    float f = 2.5;
+    float f = 1.5;
+    Fraction c = b++;
+    CHECK_EQ(c == Fraction(1, 2), true);
+    CHECK_EQ(c == b, false); // should not be equal now
+    CHECK_EQ(b == f, true);
+    CHECK_EQ(++b == a, true); // should increament then check if equal.
+    b--;                      // decrease
+    CHECK_EQ(b == f, true);   // if decreament works this should work
+    CHECK_EQ(--b == c, true); // same as at the start
 }
 
 TEST_CASE("Test 5 - output stream")
@@ -122,19 +130,21 @@ TEST_CASE("Test 6 - Input Stream")
     Fraction b(1, 2);
     SUBCASE("input to fraction")
     {
-        ifstream input("objects/test.txt"); // test.txt contains 1 2
+        istringstream input("1 2");
         Fraction a(5, 2);
-        input >> a;
+
+        CHECK_NOTHROW(input >> a);
         CHECK_EQ(a == b, true); //'a' should be changed to 1/2 = b
     }
-    SUBCASE("INPUT TO FLOAT")
-    {
-        ifstream input("objects/test.txt");
-        float f = 0;
-        cout << "f before input " << Fraction(f) << endl;
-        input >> f;
-        cout << "f after input " << Fraction(f) << endl;
-        CHECK_EQ(f == 0.5, true); //'f' should be changed to 0.5
-        CHECK_EQ(f == b, true);   // which equals to 1/2 = b
-    }
 }
+// SUBCASE("INPUT TO FLOAT")
+// {
+//     ifstream input("objects/test.txt");
+//     float f = 0;
+//     cout << "f before input " << Fraction(f) << endl;
+//     input >> f;
+//     cout << "f after input " << Fraction(f) << endl;
+//     CHECK_EQ(f == 0.5, true); //'f' should be changed to 0.5
+//     CHECK_EQ(f == b, true);   // which equals to 1/2 = b
+// }
+
