@@ -15,23 +15,25 @@ using namespace std;
 
 using namespace ariel;
 
-int main()
-{
-    Fraction a(5, 3), b(14, 21);
+
+int main() {
+    Fraction a(2,3), b(14,21);
     cout << "a: " << a << "b: " << b << endl;
-    cout << "a+b " << a + b << endl;
-    cout << "a-b " << a - b << endl;
-    cout << "a/b " << a / b << endl;
-    cout << "a*b " << a * b << endl;
-    cout << "2.3*b " << 2.3 * b << endl;
-    cout << "a+2.421 " << a + 2.421 << endl;
-    Fraction c = a + b - 1;
+    cout << "a+b" << a+b << endl; 
+    cout << "a-b" << a-b << endl; 
+    cout << "a/b" << a/b << endl; 
+    cout << "a*b" << a*b << endl; 
+    cout << "2.3*b" << 2.3*b << endl; 
+    cout << "a+2.421" << a+2.421 << endl; 
+    Fraction c(-1,5);
     cout << c++ << endl;
     cout << --c << endl;
 
-    cout << "c >=b ? : " << (c >= b) << endl;
-    if (a > 1.1)
-        cout << " a is bigger than 1.1" << endl;
-    else
-        cout << " a is smaller than 1.1" << endl;
+    cout << "-3/4 , 3/-4 : " <<(Fraction{-3, 4} == Fraction{3, -4}) <<endl;
+
+    cout << "c >=b ? : " << (c >= a) << endl;
+    if (c >= a) cout << c << " is bigger than" << a << endl;
+    else cout <<  c << " is smaller than" << a << endl;
+
+
 }
